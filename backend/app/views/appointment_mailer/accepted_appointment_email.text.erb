@@ -1,0 +1,16 @@
+Great news! Your appointment has been accepted
+
+Hello <%= @guest_name %>,
+
+Your appointment with <%= @nutricionist.name %> has been confirmed for:
+
+Date & Time: <%= @datetime.strftime("%B %d, %Y at %I:%M %p") %>
+Nutritionist: <%= @nutricionist.name %>
+Service: <%= @nutricionist.service %>
+
+Please arrive 10 minutes before your scheduled time.
+
+If you need to reschedule or cancel, please contact us as soon as possible.
+
+Best regards,
+The NutriMeet Team 

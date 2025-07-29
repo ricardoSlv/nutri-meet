@@ -1,0 +1,14 @@
+Sorry! Your appointment has been rejected
+
+Hello <%= @guest_name %>,
+
+Your appointment with <%= @nutricionist.name %> has been rejected:
+
+Date & Time: <%= @datetime.strftime("%B %d, %Y at %I:%M %p") %>
+Nutritionist: <%= @nutricionist.name %>
+Service: <%= @nutricionist.service %>
+
+Please try to reschedule for another time at your convenience.
+
+Best regards,
+The NutriMeet Team 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h1>Sorry! Your appointment has been rejected</h1>
+  
+  <p>Hello <%= @guest_name %>,</p>
+  
+  <p>Your appointment with <%= @nutricionist.name %> was rejected:</p>
+  
+  <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <strong>Date & Time:</strong> <%= @datetime.strftime("%B %d, %Y at %I:%M %p") %><br>
+    <strong>Nutritionist:</strong> <%= @nutricionist.name %><br>
+    <strong>Service:</strong> <%= @nutricionist.service %>
+  </div>
+  
+  
+  <p>Please try to reschedule for another time at your convenience.</p>
+  
+  <p>Best regards,<br>
+  The NutriMeet Team</p>
+</body>
+</html> 
