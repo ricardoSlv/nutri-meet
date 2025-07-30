@@ -21,7 +21,7 @@ export default function NutricionistCard({
   onScheduleAppointment: () => void;
 }) {
   return (
-    <Card className="w-full gap-4 grid grid-cols-3">
+    <Card className="w-full gap-4 grid grid-cols-3 rounded-xs">
       <CardHeader className="flex-shrink-0 flex-grow-0 ">
         <CardTitle>{nutritionist.name}</CardTitle>
         <CardDescription className="block w-full">

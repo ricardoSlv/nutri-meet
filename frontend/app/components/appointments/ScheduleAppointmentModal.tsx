@@ -7,7 +7,6 @@ import {
   AlertDialogDescription,
 } from "~/components/ui/alert-dialog";
 import { LuLoaderCircle } from "react-icons/lu";
-import { useMutation } from "@tanstack/react-query";
 import { useState, type SyntheticEvent } from "react";
 import type { Nutritionist } from "~/types/Nutricionist";
 import type { Service } from "~/types/Service";
@@ -15,7 +14,7 @@ import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { DateTimePicker } from "~/components/ui/DateTimePicker";
-import { backendUrl } from "~/config/backend";
+import useCreateAppointment from "~/hooks/mutations/useCreateAppointment";
 
 export default function ScheduleAppointmentModal({
   open,
@@ -30,26 +29,7 @@ export default function ScheduleAppointmentModal({
 }) {
   const [datetime, setDatetime] = useState<Date | undefined>(undefined);
 
-  const { mutate: createAppointment, status } = useMutation({
-    mutationFn: (data: any) => {
-      return fetch(`${backendUrl}/appointments`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }).then((res) => {
-        if (!res.ok) throw Error("Failed to schedule appointment");
-        return res.json();
-      });
-    },
-    onSuccess: () => {
-      console.log("success");
-    },
-    onError: () => {
-      console.log("error");
-    },
-  });
+  const { mutate: createAppointment, status } = useCreateAppointment();
 
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
