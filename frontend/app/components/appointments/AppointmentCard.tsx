@@ -2,6 +2,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "../ui/button";
 import type { Appointment } from "~/types/Appointment";
 import { Separator } from "../ui/separator";
+import { IoMdCalendar } from "react-icons/io";
+import { FaRegClock } from "react-icons/fa";
+import Avatar from "../ui/avatar";
 
 export default function AppointmentCard({
   appointment,
@@ -13,7 +16,7 @@ export default function AppointmentCard({
   return (
     <Card className="w-full flex flex-col gap-0 rounded-xs  py-0 px-0">
       <div className="grid grid-cols-[80px_1fr] px-4 py-4">
-        <img src="https://placehold.co/600x400" alt="appointment" className=" object-cover h-20 w-20" />
+        <Avatar name={appointment.guest_name} className="size-20" />
         <div className="flex flex-col gap-2">
           <CardHeader className="flex-shrink-0 flex-grow-0 ">
             <CardTitle>{appointment.guest_name}</CardTitle>
@@ -23,14 +26,18 @@ export default function AppointmentCard({
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-2 items-start">
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 flex items-center gap-1">
+                <IoMdCalendar className="text-emerald-500" />
+
                 {new Date(appointment.datetime).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
                 })}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 flex items-center gap-1">
+                <FaRegClock className="text-emerald-500" />
+
                 {new Date(appointment.datetime).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}
               </p>
             </div>

@@ -36,7 +36,7 @@ export default function nutritionists() {
         <div className="flex items-center justify-center w-full max-w-screen-lg mx-auto gap-4">
           <Select onValueChange={(v) => setNutricionistId(v)}>
             <SelectTrigger className="w-full bg-white shadow-lg rounded-xs">
-              <SelectValue placeholder="Select a nutritionist" />
+              <SelectValue placeholder="Select a nutritionist to view their appointments" />
               <SelectContent>
                 {nutritionistsResult?.nutritionists.map((nutritionist: Nutritionist) => (
                   <SelectItem key={nutritionist.id} value={nutritionist.id.toString()}>

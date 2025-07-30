@@ -52,28 +52,26 @@ export default function Scheduling() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <div className="flex gap-2">
-            <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-              <SelectTrigger className="w-full bg-white shadow-lg rounded-xs">
-                <SelectValue placeholder="Location" />
-                <SelectContent>
-                  <SelectItem key="all" value="all" onClick={() => setSelectedLocation("")} className="text-gray-500">
-                    Any location
+          <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+            <SelectTrigger className="w-full bg-white shadow-lg rounded-xs">
+              <SelectValue placeholder="Location" />
+              <SelectContent>
+                <SelectItem key="all" value="all" onClick={() => setSelectedLocation("")} className="text-gray-500">
+                  Any location
+                </SelectItem>
+                {locationsResult?.locations.map((location: Location) => (
+                  <SelectItem key={location.id} value={location.id}>
+                    {location.address}
                   </SelectItem>
-                  {locationsResult?.locations.map((location: Location) => (
-                    <SelectItem key={location.id} value={location.id}>
-                      {location.address}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </SelectTrigger>
-            </Select>
-          </div>
+                ))}
+              </SelectContent>
+            </SelectTrigger>
+          </Select>
           <Button className="bg-orange-400 hover:bg-amber-600 px-8 rounded-xs shadow-lg cursor-pointer ">Search</Button>
         </div>
       </div>
 
-      <main className="w-full flex-grow-1 flex items-center justify-start pt-8 pb-4 flex-row mx-auto bg-gray-200 flex-wrap gap-4 p-4">
+      <main className="w-full flex-grow-1 flex items-center justify-start pt-8 pb-4 flex-col mx-auto bg-gray-200 gap-4 p-4 ">
         {nutritionistsResult?.nutritionists.map((nutritionist: Nutritionist) =>
           nutritionist.services.map((service: Service) => (
             <div key={nutritionist.id + service.id}>

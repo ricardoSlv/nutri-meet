@@ -2,8 +2,8 @@ import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [
   index("routes/home.tsx"),
-  route("/scheduling", "routes/scheduling.tsx"),
-  route("/nutritionists", "routes/nutritionists.tsx"),
+  route("/nutritionist-search", "routes/scheduling.tsx"),
+  route("/pending-appointment-requests", "routes/nutritionists.tsx"),
 ] satisfies RouteConfig;
 
 //   https://cdn-icons-png.flaticon.com/512/3135/3135715.png
