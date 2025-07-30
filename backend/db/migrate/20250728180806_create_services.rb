@@ -5,7 +5,7 @@ class CreateServices < ActiveRecord::Migration[8.0]
       t.decimal :price, precision: 10, scale: 2
       
       t.references :location, null: false, foreign_key: true
-      t.references :nutricionist, null: false, foreign_key: true
+      t.references :nutritionist, null: false, foreign_key: true
 
       t.timestamps
     end

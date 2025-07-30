@@ -1,7 +1,7 @@
 class Appointment < ApplicationRecord
-    belongs_to :nutricionist
+    belongs_to :nutritionist
 
-    # validates :nutricionist_id, presence: true
+    # validates :nutritionist_id, presence: true
     validates :datetime, presence: true
     validates :guest_name, presence: true, length: { minimum: 3 }
     validates :guest_email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }

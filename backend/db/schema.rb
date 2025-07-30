@@ -17,11 +17,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_28_180806) do
     t.datetime "datetime", null: false
     t.string "status", default: "pending", null: false
     t.integer "service_id", null: false
-    t.integer "nutricionist_id", null: false
+    t.integer "nutritionist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["guest_email"], name: "index_appointments_on_guest_email", unique: true
-    t.index ["nutricionist_id"], name: "index_appointments_on_nutricionist_id"
+    t.index ["nutritionist_id"], name: "index_appointments_on_nutritionist_id"
     t.index ["service_id"], name: "index_appointments_on_service_id"
   end
 
@@ -34,7 +34,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_28_180806) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "nutricionists", force: :cascade do |t|
+  create_table "nutritionists", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
     t.string "website"
@@ -43,18 +43,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_28_180806) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.decimal "price", precision: 10, scale: 2
     t.integer "location_id", null: false
-    t.integer "nutricionist_id", null: false
+    t.integer "nutritionist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_services_on_location_id"
-    t.index ["nutricionist_id"], name: "index_services_on_nutricionist_id"
+    t.index ["nutritionist_id"], name: "index_services_on_nutritionist_id"
   end
 
-  add_foreign_key "appointments", "nutricionists"
+  add_foreign_key "appointments", "nutritionists"
   add_foreign_key "appointments", "services"
   add_foreign_key "services", "locations"
-  add_foreign_key "services", "nutricionists"
+  add_foreign_key "services", "nutritionists"
 end

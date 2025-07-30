@@ -1,5 +1,5 @@
 class Service < ApplicationRecord
-  belongs_to :nutricionist
+  belongs_to :nutritionist
   belongs_to :location
 
   validates :name, presence: true

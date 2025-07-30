@@ -3,7 +3,7 @@ class AppointmentMailer < ApplicationMailer
     @appointment = params[:appointment]
     @guest_name = @appointment.guest_name
     @datetime = @appointment.datetime
-    @nutricionist = @appointment.nutricionist
+    @nutritionist = @appointment.nutritionist
     
     mail(
       to: @appointment.guest_email,

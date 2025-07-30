@@ -1,4 +1,4 @@
-class Nutricionist < ApplicationRecord
+class Nutritionist < ApplicationRecord
     has_many :appointments
     has_many :services
 

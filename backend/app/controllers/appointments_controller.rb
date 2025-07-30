@@ -1,9 +1,9 @@
 class AppointmentsController < ApplicationController
   def index
-    if params[:nutricionist_id].present?
-      @appointments = Appointment.includes(:nutricionist).where(nutricionist_id: params[:nutricionist_id])
+    if params[:nutritionist_id].present?
+      @appointments = Appointment.includes(:nutritionist).where(nutritionist_id: params[:nutritionist_id])
     else
-      @appointments = Appointment.includes(:nutricionist).all
+      @appointments = Appointment.includes(:nutritionist).all
     end
     
     render json: {
@@ -17,11 +17,11 @@ class AppointmentsController < ApplicationController
     @new_appointment = Appointment.new(create_appointment_params)
 
     if Appointment.where(
-        nutricionist_id: @new_appointment.nutricionist_id,
+        nutritionist_id: @new_appointment.nutritionist_id,
         datetime: @new_appointment.datetime,
         status: "accepted",
     ).exists?
-      render json: { errors: "Time already booked for nutricionist" }, status: :unprocessable_entity
+      render json: { errors: "Time already booked for nutritionist" }, status: :unprocessable_entity
       return
     end
 
@@ -47,7 +47,7 @@ class AppointmentsController < ApplicationController
         AppointmentMailer.with(appointment: @appointment).accepted_appointment_email.deliver_now
 
         @same_time_appointments = Appointment
-        .where(nutricionist_id: @appointment.nutricionist_id, datetime: @appointment.datetime, status: "pending")
+        .where(nutritionist_id: @appointment.nutritionist_id, datetime: @appointment.datetime, status: "pending")
         
         @same_time_appointments.each do |appointment|
             AppointmentMailer.with(appointment: appointment).rejected_appointment_email.deliver_now
@@ -68,6 +68,6 @@ class AppointmentsController < ApplicationController
   end
 
   def create_appointment_params
-    params.require(:appointment).permit(:guest_name, :guest_email, :datetime, :nutricionist_id, :service_id)
+    params.require(:appointment).permit(:guest_name, :guest_email, :datetime, :nutritionist_id, :service_id)
   end
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "nutricionists", to: "nutricionists#index"
+  get "nutritionists", to: "nutritionists#index"
   
   get "appointments", to: "appointments#index"
   post "appointments", to: "appointments#create"
