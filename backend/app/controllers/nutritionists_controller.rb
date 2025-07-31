@@ -1,29 +1,34 @@
 class NutritionistsController < ApplicationController
     def index
-    @nutritionists = Nutritionist
-                                 
+    @nutritionists = Nutritionist.joins(services: :location)
 
-    if filter_nutritionist_params[:search].present?
+    @location_filter = filter_nutritionist_params[:location_id]
+    @search_filter = filter_nutritionist_params[:search]
+                                 
+    if @location_filter.present?
+      @nutritionists = @nutritionists.where(services: { location_id: @location_filter })
+    end
+
+    if @search_filter.present?
       @nutritionists = @nutritionists
-      .joins(:services)
-      .where('nutritionists.name LIKE ?', "%#{filter_nutritionist_params[:search]}%")
-      .or(Nutritionist.joins(:services).where('services.name LIKE ?', "%#{filter_nutritionist_params[:search]}%"))
+      .where('nutritionists.name LIKE ?', "%#{@search_filter}%")
+      .or(Nutritionist.joins(services: :location).where('services.name LIKE ?', "%#{@search_filter}%"))
     end
     
-    @nutritionists = @nutritionists.includes(services: :location).distinct
+
+    @nutritionists = @nutritionists.distinct
     
     nutritionists_json = @nutritionists.as_json(include: { services: { include: :location } })
 
     # Filter out services that don't match the search query if their nutritionist name doesn't match the search query either
-    if filter_nutritionist_params[:search].present?
-      nutritionists_json.each do |nutritionist|
-        unless nutritionist['name'].downcase.include?(filter_nutritionist_params[:search].downcase)
-        nutritionist['services'] = nutritionist['services']
-        .select do |service|
-          service['name'].downcase.include?(filter_nutritionist_params[:search].downcase)
+    nutritionists_json.each do |nutritionist|
+       unless @search_filter.present? && nutritionist['name'].downcase.include?(@search_filter.downcase)
+        nutritionist['services'] = nutritionist['services'].select do |service|
+            serviceMatches = @search_filter.blank? || service['name'].downcase.include?(@search_filter.downcase)
+            locationMatches = @location_filter.blank? || service['location']['id'] == @location_filter.to_i
+            serviceMatches && locationMatches
         end
-    end
-      end
+       end
     end
 
     render json: {
@@ -33,6 +38,6 @@ class NutritionistsController < ApplicationController
   end
 
   def filter_nutritionist_params
-    params.permit(:search)
+    params.permit(:search, :location_id)
   end
 end

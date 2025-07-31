@@ -12,7 +12,15 @@ export default function useCreateAppointment() {
         },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw Error("Failed to schedule appointment");
+      if (!res.ok) {
+        let error;
+        try {
+          error = await res.json();
+        } catch (error) {
+          throw new Error("Failed to schedule appointment");
+        }
+        throw new Error(error?.errors?.datetime || "Failed to schedule appointment");
+      }
       return await res.json();
     },
   });

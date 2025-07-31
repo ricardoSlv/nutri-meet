@@ -10,4 +10,16 @@ class AppointmentMailer < ApplicationMailer
       subject: "Your appointment has been accepted!"
     )
   end
+
+  def rejected_appointment_email
+    @appointment = params[:appointment]
+    @guest_name = @appointment.guest_name
+    @datetime = @appointment.datetime
+    @nutritionist = @appointment.service.nutritionist
+    @service = @appointment.service
+    mail(
+      to: @appointment.guest_email,
+      subject: "Your appointment has been rejected!"
+    )
+  end
 end 

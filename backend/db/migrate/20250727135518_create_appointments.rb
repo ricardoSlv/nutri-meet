@@ -11,7 +11,5 @@ class CreateAppointments < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-
-    add_index :appointments, :guest_email, unique: true
   end
 end

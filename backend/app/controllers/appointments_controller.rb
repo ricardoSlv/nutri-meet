@@ -4,7 +4,7 @@ class AppointmentsController < ApplicationController
 
 
     if params[:nutritionist_id].present?
-      @appointments = @appointments.where(nutritionist_id: params[:nutritionist_id], status: params[:status])
+      @appointments = @appointments.where(nutritionist_id: params[:nutritionist_id])
     end
 
     if params[:status].present?
@@ -26,7 +26,7 @@ class AppointmentsController < ApplicationController
         datetime: @new_appointment.datetime,
         status: "accepted",
     ).exists?
-      render json: { errors: "Time already booked for nutritionist" }, status: :unprocessable_entity
+      render json: { errors: {datetime: "Time already booked for nutritionist"} }, status: :unprocessable_entity
       return
     end
 
@@ -69,7 +69,7 @@ class AppointmentsController < ApplicationController
   private 
 
   def index_params
-    params.permit(:nutritionist_id, :status)
+    params.permit(:nutritionist_id, :status, :location)
   end
 
   def update_appointment_status_params

@@ -29,7 +29,7 @@ export default function ScheduleAppointmentModal({
 }) {
   const [datetime, setDatetime] = useState<Date | undefined>(undefined);
 
-  const { mutate: createAppointment, status } = useCreateAppointment();
+  const { mutate: createAppointment, status, error } = useCreateAppointment();
 
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -97,7 +97,9 @@ export default function ScheduleAppointmentModal({
               )}
               {status === "error" && (
                 <p className="w-full self-center text-center text-sm text-red-500">
-                  Error requesting appointment, please try again
+                  {error?.message === "Time already booked for nutritionist"
+                    ? "Time already booked for nutritionist, please select another time"
+                    : "Error requesting appointment, please try again"}
                 </p>
               )}
               <Button
