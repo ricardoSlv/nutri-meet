@@ -15,11 +15,5 @@ export default function useCreateAppointment() {
       if (!res.ok) throw Error("Failed to schedule appointment");
       return await res.json();
     },
-    onSuccess: () => {
-      console.log("success");
-    },
-    onError: () => {
-      console.log("error");
-    },
   });
 }

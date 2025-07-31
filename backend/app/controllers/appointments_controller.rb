@@ -1,13 +1,18 @@
 class AppointmentsController < ApplicationController
   def index
+    @appointments = Appointment.includes(:service)
+
+
     if params[:nutritionist_id].present?
-      @appointments = Appointment.includes(:nutritionist).where(nutritionist_id: params[:nutritionist_id])
-    else
-      @appointments = Appointment.includes(:nutritionist).all
+      @appointments = @appointments.where(nutritionist_id: params[:nutritionist_id], status: params[:status])
+    end
+
+    if params[:status].present?
+      @appointments = @appointments.where(status: params[:status])
     end
     
     render json: {
-      appointments: @appointments,
+      appointments: @appointments.as_json(include: { service: { include: :nutritionist } }),
       count: @appointments.count
     }
   end
@@ -62,6 +67,10 @@ class AppointmentsController < ApplicationController
     end
   end
   private 
+
+  def index_params
+    params.permit(:nutritionist_id, :status)
+  end
 
   def update_appointment_status_params
     params.require(:appointment).permit(:status)

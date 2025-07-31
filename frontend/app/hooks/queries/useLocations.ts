@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { backendUrl } from "~/config/backend";
 
-export default function useLocations() {
+export function useLocations() {
   return useQuery({
     queryKey: ["locations"],
     queryFn: () => fetch(`${backendUrl}/locations`).then((res) => res.json()),

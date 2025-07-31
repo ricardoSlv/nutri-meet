@@ -42,7 +42,7 @@ export default function ScheduleAppointmentModal({
       guest_name: (form.name as unknown as HTMLInputElement).value,
       guest_email: (form.email as unknown as HTMLInputElement).value,
       datetime: datetime.toISOString().slice(0, 19).replace("T", " "),
-      nutritionist_id: 99,
+      nutritionist_id: nutritionist.id,
       service_id: service.id,
     });
   };
@@ -51,7 +51,9 @@ export default function ScheduleAppointmentModal({
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Schedule an appointment with {nutritionist?.name}</AlertDialogTitle>
+          <AlertDialogTitle className="text-lg font-bold text-emerald-500">
+            Schedule an appointment with {nutritionist?.name}
+          </AlertDialogTitle>
           <AlertDialogDescription className="-mt-2 mb-2">
             <p>{service?.name}</p>
           </AlertDialogDescription>
@@ -90,23 +92,36 @@ export default function ScheduleAppointmentModal({
             <AlertDialogFooter>
               {status === "success" && (
                 <p className="w-full self-center text-center text-sm text-green-500">
-                  Appointment scheduled successfully
+                  Appointment requested successfully
                 </p>
               )}
               {status === "error" && (
                 <p className="w-full self-center text-center text-sm text-red-500">
-                  Error scheduling appointment, try again
+                  Error requesting appointment, please try again
                 </p>
               )}
-              <Button variant="outline" onClick={() => setOpen(false)} disabled={status === "success"}>
+              <Button
+                variant="outline"
+                className="rounded-xs cursor-pointer"
+                onClick={() => setOpen(false)}
+                disabled={status === "success"}
+              >
                 Cancel
               </Button>
               {status === "success" ? (
-                <Button variant="default" className="min-w-24" onClick={() => setOpen(false)}>
+                <Button
+                  variant="default"
+                  className="min-w-24 bg-orange-700/30 hover:bg-orange-800/30 text-orange-700 cursor-pointer rounded-xs"
+                  onClick={() => setOpen(false)}
+                >
                   Exit
                 </Button>
               ) : (
-                <Button variant="default" className="min-w-24" type="submit" disabled={status === "pending"}>
+                <Button
+                  className="min-w-24 bg-orange-700/30 hover:bg-orange-800/30 text-orange-700 rounded-xs cursor-pointer"
+                  type="submit"
+                  disabled={status === "pending"}
+                >
                   {status === "pending" ? <LuLoaderCircle className="animate-spin" /> : "Schedule"}
                 </Button>
               )}

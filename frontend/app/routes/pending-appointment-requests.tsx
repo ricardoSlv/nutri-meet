@@ -1,24 +1,23 @@
-import useNutritionists from "~/hooks/queries/useNutritionists";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-
 import { Select, SelectValue, SelectTrigger, SelectContent, SelectItem } from "~/components/ui/select";
 import type { Nutritionist } from "~/types/Nutricionist";
 
-import { Link } from "react-router";
-import { FaExternalLinkAlt } from "react-icons/fa";
 import type { Route } from "./+types/home";
 import Navbar from "~/components/layout/Navbar";
-import useAppointments from "~/hooks/queries/useAppointments";
+import { useNutritionists } from "~/hooks/queries/useNutritionists";
 import { useState } from "react";
 import type { Appointment } from "~/types/Appointment";
 import AppointmentCard from "~/components/appointments/AppointmentCard";
+import AnswerAppointmentModal from "~/components/appointments/AnswerAppointmentModal";
+import { usePendingAppointments } from "~/hooks/queries/usePendingAppointments";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Scheduling Page" }, { name: "description", content: "Meet your nutritionist!" }];
 }
 
-export default function nutritionists() {
+export default function PendingAppointmentRequests() {
+  const [open, setOpen] = useState(false);
+  const [appointment, setAppointment] = useState<Appointment | null>(null);
+
   const { data: nutritionistsResult, isLoading, error } = useNutritionists("");
   const [nutricionistId, setNutricionistId] = useState<string>("");
 
@@ -26,7 +25,7 @@ export default function nutritionists() {
     data: appointmentsResult,
     isLoading: isLoadingAppointments,
     error: errorAppointments,
-  } = useAppointments(nutricionistId);
+  } = usePendingAppointments(nutricionistId);
 
   return (
     <div className="h-screen flex flex-col">
@@ -53,10 +52,24 @@ export default function nutritionists() {
         <div className="grid grid-cols-4 gap-4 max-w-screen-xl items-center justify-start pt-8 pb-4  mx-auto">
           {appointmentsResult?.appointments.map((appointment: Appointment) => (
             <div key={appointment.id}>
-              <AppointmentCard appointment={appointment} onAnswerAppointment={() => {}} />
+              <AppointmentCard
+                appointment={appointment}
+                onAnswerAppointment={() => {
+                  setAppointment(appointment);
+                  setOpen(true);
+                }}
+              />
             </div>
           ))}
         </div>
+        {appointment && (
+          <AnswerAppointmentModal
+            key={`${nutricionistId}-${appointment?.id}`}
+            open={open}
+            setOpen={setOpen}
+            appointment={appointment!}
+          />
+        )}
       </main>
     </div>
   );

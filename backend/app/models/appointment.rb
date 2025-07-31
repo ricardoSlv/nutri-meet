@@ -1,5 +1,6 @@
 class Appointment < ApplicationRecord
     belongs_to :nutritionist
+    belongs_to :service
 
     # validates :nutritionist_id, presence: true
     validates :datetime, presence: true

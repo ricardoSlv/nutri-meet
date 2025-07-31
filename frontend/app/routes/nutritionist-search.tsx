@@ -9,11 +9,9 @@ import ScheduleAppointmentModal from "~/components/appointments/ScheduleAppointm
 import type { Nutritionist } from "~/types/Nutricionist";
 import type { Service } from "~/types/Service";
 import NutricionistCard from "~/components/nutricionists/NutritionistCard";
-import { Link } from "react-router";
-import { FaExternalLinkAlt } from "react-icons/fa";
 import type { Route } from "./+types/home";
-import useNutritionists from "~/hooks/queries/useNutritionists";
-import useLocations from "~/hooks/queries/useLocations";
+import { useNutritionists } from "~/hooks/queries/useNutritionists";
+import { useLocations } from "~/hooks/queries/useLocations";
 import type { Location } from "~/types/Location";
 import Navbar from "~/components/layout/Navbar";
 
@@ -21,7 +19,7 @@ export function meta({}: Route.MetaArgs) {
   return [{ title: "Scheduling Page" }, { name: "description", content: "Meet your nutritionist!" }];
 }
 
-export default function Scheduling() {
+export default function NutritionistSearch() {
   const [search, setSearch] = useState("");
   const [querySearch] = useDebounce(search, 500);
   const [selectedLocation, setSelectedLocation] = useState<string>("");
@@ -88,7 +86,7 @@ export default function Scheduling() {
           ))
         )}
         <ScheduleAppointmentModal
-          key={nutritionist?.id ?? "" + service?.id ?? ""}
+          key={`${nutritionist?.id}-${service?.id}`}
           open={open}
           setOpen={setOpen}
           nutritionist={nutritionist!}
