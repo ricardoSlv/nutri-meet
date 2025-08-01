@@ -1,8 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { backendUrl } from "~/config/backend";
 import type { CreateAppointmentDTO } from "~/types/Appointment";
 
 export default function useCreateAppointment() {
+  const client = useQueryClient();
+
   return useMutation({
     mutationFn: async (data: CreateAppointmentDTO) => {
       const res = await fetch(`${backendUrl}/appointments`, {
@@ -12,6 +14,7 @@ export default function useCreateAppointment() {
         },
         body: JSON.stringify(data),
       });
+
       if (!res.ok) {
         let error;
         try {
@@ -21,6 +24,8 @@ export default function useCreateAppointment() {
         }
         throw new Error(error?.errors?.datetime || "Failed to schedule appointment");
       }
+
+      client.invalidateQueries({ queryKey: ["pending-appointments", data.nutritionist_id.toString()] });
       return await res.json();
     },
   });

@@ -10,7 +10,7 @@ import {
 import { Button } from "../ui/button";
 import type { Nutritionist } from "~/types/Nutricionist";
 import type { Service } from "~/types/Service";
-import Avatar from "../ui/avatar";
+import Avatar from "../ui/card-avatar";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { LuStar } from "react-icons/lu";
 import { PiHandbagSimple } from "react-icons/pi";

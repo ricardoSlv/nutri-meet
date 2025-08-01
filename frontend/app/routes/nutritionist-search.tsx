@@ -98,8 +98,10 @@ export default function NutritionistSearch() {
             </div>
           ))
         )}
+
+        {/* Gives me a new one whenever the modal is opened or closed */}
         <ScheduleAppointmentModal
-          key={`${nutritionist?.id}-${service?.id}`}
+          key={`${nutritionist?.id}-${service?.id}-${open}`}
           open={open}
           setOpen={setOpen}
           nutritionist={nutritionist!}

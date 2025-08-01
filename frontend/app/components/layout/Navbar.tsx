@@ -1,6 +1,15 @@
 import { Button } from "~/components/ui/button";
 import { Link } from "react-router";
 import { FaArrowRight, FaExternalLinkAlt } from "react-icons/fa";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 
 export default function Navbar() {
   return (
@@ -33,6 +42,23 @@ export default function Navbar() {
             <FaArrowRight />
           </Link>
         </p>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Avatar className="mr-5 flex-shrink-0 min-w-10 size-10">
+              <AvatarImage src="https://cdn-icons-png.flaticon.com/512/18831/18831913.png" alt="@user-avatar" />
+              <AvatarFallback>Profile</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent side="bottom" align="end">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Subscription</DropdownMenuItem>
+            <DropdownMenuItem>Billing</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-500">Logout</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </nav>
   );

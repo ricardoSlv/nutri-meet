@@ -4,7 +4,7 @@ import type { Appointment } from "~/types/Appointment";
 import { Separator } from "../ui/separator";
 import { IoMdCalendar } from "react-icons/io";
 import { FaRegClock } from "react-icons/fa";
-import Avatar from "../ui/avatar";
+import Avatar from "../ui/card-avatar";
 
 export default function AppointmentCard({
   appointment,

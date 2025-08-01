@@ -8,10 +8,11 @@ export type NutritionistSearchParams = {
 
 export function useNutritionists(params: NutritionistSearchParams) {
   const searchParams = new URLSearchParams();
-  if (params.searchQuery !== "") {
+
+  if (!!params.searchQuery) {
     searchParams.set("search", params.searchQuery);
   }
-  if (params.location_id !== "") {
+  if (!!params.location_id) {
     searchParams.set("location_id", params.location_id);
   }
 
@@ -19,6 +20,5 @@ export function useNutritionists(params: NutritionistSearchParams) {
     queryKey: ["nutritionists", params.searchQuery, params.location_id],
     queryFn: () => fetch(`${backendUrl}/nutritionists?${searchParams.toString()}`).then((res) => res.json()),
     staleTime: 1000 * 60 * 5,
-    // enabled: !!querySearch,
   });
 }
