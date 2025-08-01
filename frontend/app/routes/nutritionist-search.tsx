@@ -1,6 +1,5 @@
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Input } from "~/components/ui/input";
 import { useDebounce } from "use-debounce";
 
@@ -10,7 +9,7 @@ import type { Nutritionist } from "~/types/Nutricionist";
 import type { Service } from "~/types/Service";
 import NutricionistCard from "~/components/nutricionists/NutritionistCard";
 import type { Route } from "./+types/home";
-import { useNutritionists } from "~/hooks/queries/useNutritionists";
+import { useNutritionists, type NutritionistSearchParams } from "~/hooks/queries/useNutritionists";
 import { useLocations } from "~/hooks/queries/useLocations";
 import type { Location } from "~/types/Location";
 import Navbar from "~/components/layout/Navbar";
@@ -21,14 +20,18 @@ export function meta({}: Route.MetaArgs) {
 
 export default function NutritionistSearch() {
   const [search, setSearch] = useState("");
-  const [querySearch] = useDebounce(search, 500);
-  const [selectedLocation, setSelectedLocation] = useState<string>("");
+  //   const [searchQuery] = useDebounce(search, 500);
+  const [searchQuery, setSearchQuery] = useState<NutritionistSearchParams>({
+    searchQuery: "",
+    location_id: "",
+  });
+  const [selectedLocationId, setSelectedLocationId] = useState<string>("");
 
   const {
     data: nutritionistsResult,
     isLoading: isLoadingNutritionists,
     error: errorNutritionists,
-  } = useNutritionists(querySearch);
+  } = useNutritionists(searchQuery);
   const { data: locationsResult, isLoading: isLoadingLocations, error: errorLocations } = useLocations();
 
   const [open, setOpen] = useState(false);
@@ -50,11 +53,11 @@ export default function NutritionistSearch() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+          <Select value={selectedLocationId} onValueChange={setSelectedLocationId}>
             <SelectTrigger className="w-full bg-white shadow-lg rounded-xs">
               <SelectValue placeholder="Location" />
               <SelectContent>
-                <SelectItem key="all" value="all" onClick={() => setSelectedLocation("")} className="text-gray-500">
+                <SelectItem key="all" value="all" onClick={() => setSelectedLocationId("")} className="text-gray-500">
                   Any location
                 </SelectItem>
                 {locationsResult?.locations.map((location: Location) => (
@@ -65,7 +68,17 @@ export default function NutritionistSearch() {
               </SelectContent>
             </SelectTrigger>
           </Select>
-          <Button className="bg-orange-400 hover:bg-amber-600 px-8 rounded-xs shadow-lg cursor-pointer ">Search</Button>
+          <Button
+            className="bg-orange-400 hover:bg-amber-600 px-8 rounded-xs shadow-lg cursor-pointer "
+            onClick={() =>
+              setSearchQuery({
+                searchQuery: search,
+                location_id: selectedLocationId === "all" ? "" : selectedLocationId,
+              })
+            }
+          >
+            Search
+          </Button>
         </div>
       </div>
 
