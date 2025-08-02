@@ -5,6 +5,7 @@ import { Separator } from "../ui/separator";
 import { IoMdCalendar } from "react-icons/io";
 import { FaRegClock } from "react-icons/fa";
 import Avatar from "../ui/card-avatar";
+import { useTranslation } from "react-i18next";
 
 export default function AppointmentCard({
   appointment,
@@ -13,6 +14,8 @@ export default function AppointmentCard({
   appointment: Appointment;
   onAnswerAppointment: () => void;
 }) {
+  const { t } = useTranslation();
+
   return (
     <Card className="w-full flex flex-col gap-0 rounded-xs  py-0 px-0">
       <div className="grid grid-cols-[80px_1fr] px-4 py-4">
@@ -21,7 +24,7 @@ export default function AppointmentCard({
           <CardHeader className="flex-shrink-0 flex-grow-0 ">
             <CardTitle>{appointment.guest_name}</CardTitle>
             <CardDescription className="block w-full">
-              <p className="text-sm text-gray-500 truncate max-w-full">Online appointment</p>
+              <p className="text-sm text-gray-500 truncate max-w-full">{t("onlineAppointment")}</p>
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -47,7 +50,7 @@ export default function AppointmentCard({
       <Separator className="" />
       <CardFooter className="flex-row gap-2 items-center justify-center">
         <Button variant="link" className="text-emerald-500 cursor-pointer" onClick={onAnswerAppointment}>
-          Answer appointment
+          {t("answerAppointment")}
         </Button>
       </CardFooter>
     </Card>

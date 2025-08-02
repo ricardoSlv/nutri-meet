@@ -19,6 +19,7 @@ import useAnswerAppointment from "~/hooks/mutations/useAnswerAppointment";
 import type { Appointment } from "~/types/Appointment";
 import { FaRegClock } from "react-icons/fa";
 import { IoMdCalendar } from "react-icons/io";
+import { useTranslation } from "react-i18next";
 
 export default function AnswerAppointmentModal({
   open,
@@ -29,6 +30,8 @@ export default function AnswerAppointmentModal({
   setOpen: (open: boolean) => void;
   appointment: Appointment;
 }) {
+  const { t } = useTranslation();
+
   const { mutate: answerAppointment, status } = useAnswerAppointment();
 
   return (
@@ -36,7 +39,7 @@ export default function AnswerAppointmentModal({
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-lg font-bold text-emerald-500">
-            Answer {appointment.guest_name}'s request
+            {t("answerGuestRequest", { name: appointment.guest_name })}
           </DialogTitle>
           <DialogDescription className="-mt-2 mb-2">
             <p>{appointment.service.name}</p>
@@ -62,12 +65,12 @@ export default function AnswerAppointmentModal({
           <DialogFooter>
             {status === "success" && (
               <p className="w-full self-center text-center text-sm text-green-500">
-                Appointment scheduled successfully
+                {t("appointmentScheduledSuccessfully")}
               </p>
             )}
             {status === "error" && (
               <p className="w-full self-center text-center text-sm text-red-500">
-                Error answering request, please try again
+                {t("errorAnsweringRequestPleaseTryAgain")}
               </p>
             )}
 
@@ -76,7 +79,7 @@ export default function AnswerAppointmentModal({
               disabled={status === "pending" || status === "success"}
               onClick={() => answerAppointment({ id: appointment.id, status: "rejected" })}
             >
-              Reject
+              {t("reject")}
             </Button>
 
             <Button
@@ -84,7 +87,7 @@ export default function AnswerAppointmentModal({
               disabled={status === "pending" || status === "success"}
               onClick={() => answerAppointment({ id: appointment.id, status: "accepted" })}
             >
-              {status === "pending" ? <LuLoaderCircle className="animate-spin" /> : "Accept"}
+              {status === "pending" ? <LuLoaderCircle className="animate-spin" /> : t("accept")}
             </Button>
           </DialogFooter>
         </DialogHeader>

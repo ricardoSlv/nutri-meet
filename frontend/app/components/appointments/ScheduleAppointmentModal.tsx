@@ -15,6 +15,7 @@ import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { DateTimePicker } from "~/components/ui/DateTimePicker";
 import useCreateAppointment from "~/hooks/mutations/useCreateAppointment";
+import { useTranslation } from "react-i18next";
 
 export default function ScheduleAppointmentModal({
   open,
@@ -27,6 +28,8 @@ export default function ScheduleAppointmentModal({
   nutritionist: Nutritionist;
   service: Service;
 }) {
+  const { t } = useTranslation();
+
   const [datetime, setDatetime] = useState<Date | undefined>(undefined);
 
   const { mutate: createAppointment, status, error } = useCreateAppointment();
@@ -52,27 +55,27 @@ export default function ScheduleAppointmentModal({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-lg font-bold text-emerald-500">
-            Schedule an appointment with {nutritionist?.name}
+            {t("scheduleAnAppointmentWith", { name: nutritionist?.name })}
           </AlertDialogTitle>
           <AlertDialogDescription className="-mt-2 mb-2">
             <p>{service?.name}</p>
           </AlertDialogDescription>
           <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">{t("name")}</Label>
               <Input
                 type="text"
-                placeholder="Your name"
+                placeholder={t("yourName")}
                 required
                 name="name"
                 disabled={status === "pending" || status === "success"}
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t("email")}</Label>
               <Input
                 type="email"
-                placeholder="The email you want to be contacted"
+                placeholder={t("theEmailYouWantToBeContactedBy")}
                 required
                 name="email"
                 disabled={status === "pending" || status === "success"}
@@ -84,7 +87,7 @@ export default function ScheduleAppointmentModal({
                 (status === "pending" || status === "success" ? "opacity-50 pointer-events-none" : "")
               }
             >
-              <Label htmlFor="time-picker">Day and time of the appointment</Label>
+              <Label htmlFor="time-picker">{t("dayAndTimeOfTheAppointment")}</Label>
               <DateTimePicker setDatetime={setDatetime} />
               {/* Hack to show the default form validation for the customdatetime input */}
               <input name="datetime" className="h-1 -mt-1 opacity-0" value={datetime?.toISOString()} required />
@@ -92,14 +95,14 @@ export default function ScheduleAppointmentModal({
             <AlertDialogFooter>
               {status === "success" && (
                 <p className="w-full self-center text-center text-sm text-green-500">
-                  Appointment requested successfully
+                  {t("appointmentRequestedSuccessfully")}
                 </p>
               )}
               {status === "error" && (
                 <p className="w-full self-center text-center text-sm text-red-500">
                   {error?.message === "Time already booked for nutritionist"
-                    ? "Time already booked for nutritionist, please select another time"
-                    : "Error requesting appointment, please try again"}
+                    ? t("timeAlreadyBookedForNutritionist")
+                    : t("errorRequestingAppointment")}
                 </p>
               )}
               <Button
@@ -108,7 +111,7 @@ export default function ScheduleAppointmentModal({
                 onClick={() => setOpen(false)}
                 disabled={status === "success"}
               >
-                Cancel
+                {t("cancel")}
               </Button>
               {status === "success" ? (
                 <Button
@@ -116,7 +119,7 @@ export default function ScheduleAppointmentModal({
                   className="min-w-24 bg-orange-700/30 hover:bg-orange-800/30 text-orange-700 cursor-pointer rounded-xs"
                   onClick={() => setOpen(false)}
                 >
-                  Exit
+                  {t("exit")}
                 </Button>
               ) : (
                 <Button
@@ -124,7 +127,7 @@ export default function ScheduleAppointmentModal({
                   type="submit"
                   disabled={status === "pending"}
                 >
-                  {status === "pending" ? <LuLoaderCircle className="animate-spin" /> : "Schedule"}
+                  {status === "pending" ? <LuLoaderCircle className="animate-spin" /> : t("schedule")}
                 </Button>
               )}
             </AlertDialogFooter>

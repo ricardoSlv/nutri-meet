@@ -17,6 +17,7 @@ import { PiHandbagSimple } from "react-icons/pi";
 import { BsCashStack } from "react-icons/bs";
 import { FaAngleDown } from "react-icons/fa";
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export default function NutricionistCard({
   nutritionist,
@@ -27,15 +28,17 @@ export default function NutricionistCard({
   service: Service;
   onScheduleAppointment: () => void;
 }) {
+  const { t } = useTranslation();
+
   return (
     <Card className="w-full gap-4 grid p-6 grid-cols-[80px_1fr_1fr_1fr] rounded-xs max-w-screen-md">
       <Avatar name={nutritionist.name} className="size-20" />
       <div className="flex flex-col gap-2">
         <CardHeader className="flex-shrink-0 flex-grow-0 ">
           <CardTitle>
-            <p className="flex items-center gap-1 text-xs font-extrabold bg-emerald-500/30 rounded-2xl text-emerald-500  w-fit px-2 py-1">
+            <p className="flex items-center gap-1 text-xs capitalize font-extrabold bg-emerald-500/30 rounded-2xl text-emerald-500  w-fit px-2 py-1">
               <LuStar />
-              FOLLOW-UP
+              {t("followUp")}
             </p>
             <h1 className="text-lg text-emerald-500 font-bold">{nutritionist.name}</h1>
             <p className="text-sm text-gray-500 font-medium max-w-full">{service.name}</p>
@@ -43,7 +46,7 @@ export default function NutricionistCard({
           <CardDescription className="w-full pt-4 pl-4 flex flex-col gap-2">
             <p className="text-sm text-emerald-500 flex items-center gap-2 font-bold truncate">
               <HiOutlineLocationMarker />
-              Online follow-up
+              {t("onlineFollowUp")}
             </p>
             <p className="text-sm text-gray-500 truncate max-w-full pl-6">{service.location.address}</p>
             <p className="text-sm text-gray-500 truncate max-w-full pl-6">{service.location.municipality}</p>
@@ -54,7 +57,7 @@ export default function NutricionistCard({
         <div className="flex flex-col gap-1 w-fit">
           <p className="text-sm text-gray-500 w-fit flex items-center gap-2 truncate">
             <PiHandbagSimple className="text-emerald-500" />
-            First appointment
+            {t("firstAppointment")}
             <FaAngleDown />
           </p>
           <p className="text-sm text-gray-500 w-fit flex items-center gap-2">
@@ -69,12 +72,12 @@ export default function NutricionistCard({
           onClick={onScheduleAppointment}
           className="w-full bg-orange-700/30 hover:bg-orange-800/30 text-orange-700 rounded-xs cursor-pointer"
         >
-          Schedule an appointment
+          {t("scheduleAnAppointment")}
         </Button>
 
         <Link to={nutritionist.website} target="_blank" className="w-full ">
           <Button className="w-full bg-emerald-500/30 hover:bg-emerald-600/30 text-emerald-500 rounded-xs cursor-pointer">
-            Website
+            {t("website")}
           </Button>
         </Link>
       </CardFooter>

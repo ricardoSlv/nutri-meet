@@ -13,12 +13,15 @@ import { useNutritionists, type NutritionistSearchParams } from "~/hooks/queries
 import { useLocations } from "~/hooks/queries/useLocations";
 import type { Location } from "~/types/Location";
 import Navbar from "~/components/layout/Navbar";
+import { useTranslation } from "react-i18next";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Scheduling Page" }, { name: "description", content: "Meet your nutritionist!" }];
 }
 
 export default function NutritionistSearch() {
+  const { t } = useTranslation();
+
   const [search, setSearch] = useState("");
   //   const [searchQuery] = useDebounce(search, 500);
   const [searchQuery, setSearchQuery] = useState<NutritionistSearchParams>({
@@ -55,10 +58,10 @@ export default function NutritionistSearch() {
           />
           <Select value={selectedLocationId} onValueChange={setSelectedLocationId}>
             <SelectTrigger className="w-full bg-white shadow-lg rounded-xs">
-              <SelectValue placeholder="Location" />
+              <SelectValue placeholder={t("location")} />
               <SelectContent>
                 <SelectItem key="all" value="all" onClick={() => setSelectedLocationId("")} className="text-gray-500">
-                  Any location
+                  {t("anyLocation")}
                 </SelectItem>
                 {locationsResult?.locations.map((location: Location) => (
                   <SelectItem key={location.id} value={location.id}>
@@ -77,7 +80,7 @@ export default function NutritionistSearch() {
               })
             }
           >
-            Search
+            {t("search")}
           </Button>
         </div>
       </div>

@@ -9,16 +9,19 @@ import type { Appointment } from "~/types/Appointment";
 import AppointmentCard from "~/components/appointments/AppointmentCard";
 import AnswerAppointmentModal from "~/components/appointments/AnswerAppointmentModal";
 import { usePendingAppointments } from "~/hooks/queries/usePendingAppointments";
+import { useTranslation } from "react-i18next";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Scheduling Page" }, { name: "description", content: "Meet your nutritionist!" }];
 }
 
 export default function PendingAppointmentRequests() {
+  const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const [appointment, setAppointment] = useState<Appointment | null>(null);
 
-  const { data: nutritionistsResult, isLoading, error } = useNutritionists("");
+  const { data: nutritionistsResult, isLoading, error } = useNutritionists({ searchQuery: "", location_id: "" });
   const [nutricionistId, setNutricionistId] = useState<string>("");
 
   const {
@@ -35,7 +38,7 @@ export default function PendingAppointmentRequests() {
         <div className="flex items-center justify-center w-full max-w-screen-lg mx-auto gap-4">
           <Select onValueChange={(v) => setNutricionistId(v)}>
             <SelectTrigger className="w-full bg-white shadow-lg rounded-xs">
-              <SelectValue placeholder="Select a nutritionist to view their appointments" />
+              <SelectValue placeholder={t("selectANutritionistToViewTheirAppointments")} />
               <SelectContent>
                 {nutritionistsResult?.nutritionists.map((nutritionist: Nutritionist) => (
                   <SelectItem key={nutritionist.id} value={nutritionist.id.toString()}>

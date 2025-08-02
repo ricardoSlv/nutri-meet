@@ -1,8 +1,10 @@
+import "./app.css";
+import "./lib/i18n";
+
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { useMemo } from "react";
 
 import type { Route } from "./+types/root";
-import "./app.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const links: Route.LinksFunction = () => [
