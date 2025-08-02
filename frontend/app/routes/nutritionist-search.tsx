@@ -52,7 +52,7 @@ export default function NutritionistSearch() {
           <Input
             type="text"
             className="w-full bg-white shadow-lg rounded-xs"
-            placeholder="Search for a nutritionist name or service"
+            placeholder={t("searchForANutritionistNameOrService")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

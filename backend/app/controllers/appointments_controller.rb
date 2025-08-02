@@ -10,7 +10,7 @@ class AppointmentsController < ApplicationController
     if params[:status].present?
       @appointments = @appointments.where(status: params[:status])
     end
-    
+
     render json: {
       appointments: @appointments.as_json(include: { service: { include: :nutritionist } }),
       count: @appointments.count
@@ -26,12 +26,12 @@ class AppointmentsController < ApplicationController
         datetime: @new_appointment.datetime,
         status: "accepted",
     ).exists?
-      render json: { errors: {datetime: "Time already booked for nutritionist"} }, status: :unprocessable_entity
+      render json: { errors: { datetime: "Time already booked for nutritionist" } }, status: :unprocessable_entity
       return
     end
 
     Appointment.where(
-        guest_email: @new_appointment.guest_email, 
+        guest_email: @new_appointment.guest_email,
         status: "pending"
     ).destroy_all
 
@@ -46,14 +46,14 @@ class AppointmentsController < ApplicationController
   def update
     @appointment = Appointment.find(params[:id])
     @appointment.status = update_appointment_status_params[:status]
-    
+
     if @appointment.save
       if @appointment.status == "accepted"
         AppointmentMailer.with(appointment: @appointment).accepted_appointment_email.deliver_now
 
         @same_time_appointments = Appointment
         .where(nutritionist_id: @appointment.nutritionist_id, datetime: @appointment.datetime, status: "pending")
-        
+
         @same_time_appointments.each do |appointment|
             AppointmentMailer.with(appointment: appointment).rejected_appointment_email.deliver_now
         end
@@ -66,7 +66,7 @@ class AppointmentsController < ApplicationController
       render json: { errors: @appointment.errors }, status: :unprocessable_entity
     end
   end
-  private 
+  private
 
   def index_params
     params.permit(:nutritionist_id, :status, :location)

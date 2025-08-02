@@ -32,6 +32,7 @@ export default function AnswerAppointmentModal({
 }) {
   const { t } = useTranslation();
 
+  const [answerStatus, setAnswerStatus] = useState<"accepted" | "rejected">();
   const { mutate: answerAppointment, status } = useAnswerAppointment();
 
   return (
@@ -65,7 +66,9 @@ export default function AnswerAppointmentModal({
           <DialogFooter>
             {status === "success" && (
               <p className="w-full self-center text-center text-sm text-green-500">
-                {t("appointmentScheduledSuccessfully")}
+                {answerStatus === "accepted"
+                  ? t("appointmentScheduledSuccessfully")
+                  : t("appointmentRejectedSuccessfully")}
               </p>
             )}
             {status === "error" && (
@@ -77,7 +80,10 @@ export default function AnswerAppointmentModal({
             <Button
               className="min-w-24 bg-orange-700/30 hover:bg-orange-800/30 text-orange-700 cursor-pointer rounded-xs"
               disabled={status === "pending" || status === "success"}
-              onClick={() => answerAppointment({ id: appointment.id, status: "rejected" })}
+              onClick={() => {
+                answerAppointment({ id: appointment.id, status: "rejected" });
+                setAnswerStatus("rejected");
+              }}
             >
               {t("reject")}
             </Button>
@@ -85,7 +91,10 @@ export default function AnswerAppointmentModal({
             <Button
               className="min-w-24 bg-emerald-500/30 hover:bg-emerald-600/30 text-emerald-500 rounded-xs cursor-pointer"
               disabled={status === "pending" || status === "success"}
-              onClick={() => answerAppointment({ id: appointment.id, status: "accepted" })}
+              onClick={() => {
+                answerAppointment({ id: appointment.id, status: "accepted" });
+                setAnswerStatus("accepted");
+              }}
             >
               {status === "pending" ? <LuLoaderCircle className="animate-spin" /> : t("accept")}
             </Button>

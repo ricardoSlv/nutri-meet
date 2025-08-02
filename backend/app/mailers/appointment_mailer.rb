@@ -22,4 +22,4 @@ class AppointmentMailer < ApplicationMailer
       subject: "Your appointment has been rejected!"
     )
   end
-end 
+end

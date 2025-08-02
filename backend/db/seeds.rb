@@ -12,18 +12,24 @@ nutritionists = [
     {
         name: "João da Silva",
         email: "joao@gmail.com",
-        website: "joao.com"
+        website: "https://joao.com"
     },
     {
         name: "Maria Oliveira",
         email: "maria@gmail.com",
-        website: "maria.com"
+        website: "https://maria.com"
     },
     {
         name: "Pedro Santos",
         email: "pedro@gmail.com",
-        website: "pedro.com"
+        website: "https://pedro.com"
+    },
+    {
+        name: "Ana Costa",
+        email: "ana.costa@gmail.com",
+        website: "https://anacosta.com"
     }
+
 ]
 
 locations = [
@@ -44,6 +50,36 @@ locations = [
         municipality: "Barreiro",
         district: "Lisboa",
         zipcode: "123456"
+    },
+    {
+        address: "Avenida dos Aliados, 100",
+        municipality: "Porto",
+        district: "Porto",
+        zipcode: "400012"
+    },
+    {
+        address: "Praça do Comércio, 50",
+        municipality: "Lisboa",
+        district: "Lisboa",
+        zipcode: "110012"
+    },
+    {
+        address: "Rua das Flores, 45",
+        municipality: "Coimbra",
+        district: "Coimbra",
+        zipcode: "300045"
+    },
+    {
+        address: "Avenida Central, 200",
+        municipality: "Braga",
+        district: "Braga",
+        zipcode: "470020"
+    },
+    {
+        address: "Rua do Sol, 77",
+        municipality: "Funchal",
+        district: "Madeira",
+        zipcode: "900077"
     }
 ]
 
@@ -83,6 +119,36 @@ services = [
         price: 144.50,
         nutritionist: "Pedro Santos",
         location: "Rua do Sobrado, 123"
+    },
+    {
+        name: "Consulta de Nutrição Clínica",
+        price: 120,
+        nutritionist: "João da Silva",
+        location: "Avenida Central, 200"
+    },
+    {
+        name: "Plano Alimentar Personalizado",
+        price: 180,
+        nutritionist: "Pedro Santos",
+        location: "Rua da Praia, 123"
+    },
+    {
+        name: "Reeducação Alimentar",
+        price: 110,
+        nutritionist: "João da Silva",
+        location: "Rua do Sobrado, 123"
+    },
+    {
+        name: "Nutrição Vegetariana",
+        price: 130,
+        nutritionist: "Maria Oliveira",
+        location: "Rua da Bairro, 123"
+    },
+    {
+        name: "Avaliação Antropométrica",
+        price: 90,
+        nutritionist: "Pedro Santos",
+        location: "Rua do Sol, 77"
     }
 
 
@@ -115,6 +181,62 @@ guests = [
         appointment_date: "2025-07-28 10:00:00",
         client_to_nutritionist: "Pedro Santos",
         service: "Complementos Dietéticos"
+    },
+    {
+        name: "Beatriz Lopes",
+        email: "beatriz.lopes@gmail.com",
+        appointment_date: "2025-07-29 11:00:00",
+        client_to_nutritionist: "Maria Oliveira",
+        service: "Nutrição Vegetariana"
+    },
+    {
+        name: "Ricardo Martins",
+        email: "ricardo.martins@gmail.com",
+        appointment_date: "2025-07-30 09:30:00",
+        client_to_nutritionist: "Pedro Santos",
+        service: "Avaliação Antropométrica"
+    },
+    {
+        name: "Sofia Almeida",
+        email: "sofia.almeida@gmail.com",
+        appointment_date: "2025-07-29 15:00:00",
+        client_to_nutritionist: "João da Silva",
+        service: "Reeducação Alimentar"
+    },
+    {
+        name: "Tiago Ferreira",
+        email: "tiago.ferreira@gmail.com",
+        appointment_date: "2025-07-31 14:00:00",
+        client_to_nutritionist: "Maria Oliveira",
+        service: "Nutrição Desportiva"
+    },
+    {
+        name: "Helena Sousa",
+        email: "helena.sousa@gmail.com",
+        appointment_date: "2025-07-31 16:00:00",
+        client_to_nutritionist: "Pedro Santos",
+        service: "Complementos Dietéticos"
+    },
+    {
+        name: "Gabriel Lima",
+        email: "gabriel.lima@gmail.com",
+        appointment_date: "2025-08-01 10:00:00",
+        client_to_nutritionist: "Maria Oliveira",
+        service: "Gestão de peso"
+    },
+    {
+        name: "Patrícia Silva",
+        email: "patricia.silva@gmail.com",
+        appointment_date: "2025-08-01 10:00:00",
+        client_to_nutritionist: "Maria Oliveira",
+        service: "Nutrição Desportiva"
+    },
+    {
+        name: "Rafael Costa",
+        email: "rafael.costa@gmail.com",
+        appointment_date: "2025-08-01 10:00:00",
+        client_to_nutritionist: "Maria Oliveira",
+        service: "Nutrição Vegetariana"
     }
 ]
 
@@ -143,7 +265,7 @@ end
 
 guests.each do |guest|
     Appointment.create!(
-        guest_name: guest[:name], 
+        guest_name: guest[:name],
         guest_email: guest[:email],
         datetime: guest[:appointment_date],
         service_id: Service.find_by(name: guest[:service]).id,

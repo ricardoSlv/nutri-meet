@@ -1,6 +1,6 @@
 {
   "selectANutritionistToViewTheirAppointments": "Seleciona um nutricionista para ver as suas marcações",
-  "searchForANutritionistNameOrService": "Pesquisa por um nutricionista por nome ou serviço",
+  "searchForANutritionistNameOrService": "Procura um nutricionista por nome ou serviço",
   "location": "Localização",
   "anyLocation": "Qualquer localização",
   "name": "Nome",
@@ -26,6 +26,9 @@
   "appointmentRequestedSuccessfully": "Marcação solicitada com sucesso",
   "timeAlreadyBookedForNutritionist": "Data já marcada para o nutricionista, por favor seleciona outra data",
   "errorRequestingAppointment": "Erro ao solicitar marcação, por favor tenta novamente",
+  "appointmentScheduledSuccessfully": "Marcação agendada com sucesso",
+  "appointmentRejectedSuccessfully": "Marcação rejeitada com sucesso",
+  "errorAnsweringRequestPleaseTryAgain": "Erro ao responder ao pedido, por favor tenta novamente",
   "allLocations": "Todas as localizações",
   "nutritionistSearch": "Pesquisa de nutricionista",
   "pendingAppointmentRequests": "Pedidos de marcação pendentes",
