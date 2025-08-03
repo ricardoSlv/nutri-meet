@@ -12,7 +12,7 @@ class NutritionistsControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil JSON.parse(response.body)["count"]
   end
 
-  test "should not return nutricionist-service pairs that match the search" do
+  test "should not return nutricionist-service pairs that dont match the search" do
     get nutritionists_url, params: { search: "pe" }
     assert_response :success
     response_body = JSON.parse(response.body)
