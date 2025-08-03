@@ -32,7 +32,7 @@ ja que o nome deste nao faz match com a pesquisa, apenas alguns servicos deste, 
 # Funcionalidades da aplicacao
 
 i18n
-caching client side react query, server side rails low level cache
+caching client side react query, server side rails low level cache (rails por default ja faz cache das queries sql dentro da mesma action)
 paginacao client side (pending)
 testes (pending)
 
@@ -42,6 +42,8 @@ Primeiro pedido falha, a partir funciona tudo normalmente
 
 O endpoint /nutricionist talvez devesse ter outro nome, ja que a pesquisa e feita por caracteristicas nao so do nutricionista
 mas tambem por caracteristicas dos servicos e localizacoes dos servicos destes.
+
+Orientar o resultado mais as necessidades da pagina, em vez de ter os servicos agrupados por nutricionista e ter de descortinar no frontend
 
 Datas de agendamentos nao sao validados,e possivel marcar para o passado.
 

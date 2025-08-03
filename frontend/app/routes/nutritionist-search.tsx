@@ -14,6 +14,18 @@ import { useLocations } from "~/hooks/queries/useLocations";
 import type { Location } from "~/types/Location";
 import Navbar from "~/components/layout/Navbar";
 import { useTranslation } from "react-i18next";
+import {
+  Pagination,
+  PaginationNext,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationContent,
+  PaginationItem,
+  PaginationEllipsis,
+} from "~/components/ui/pagination";
+import { usePaginatedNutritionistSearchResult } from "~/hooks/queries/usePaginatedNutricionists";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { cn } from "~/lib/utils";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Scheduling Page" }, { name: "description", content: "Meet your nutritionist!" }];
@@ -32,9 +44,15 @@ export default function NutritionistSearch() {
 
   const {
     data: nutritionistsResult,
+    page,
+    setPage,
+    totalPages,
     isLoading: isLoadingNutritionists,
     error: errorNutritionists,
-  } = useNutritionists(searchQuery);
+  } = usePaginatedNutritionistSearchResult({ ...searchQuery, limit: 4 });
+
+  console.log("nutritionistsResult", nutritionistsResult);
+
   const { data: locationsResult, isLoading: isLoadingLocations, error: errorLocations } = useLocations();
 
   const [open, setOpen] = useState(false);
@@ -86,7 +104,7 @@ export default function NutritionistSearch() {
       </div>
 
       <main className="w-full flex-grow-1 flex items-center justify-start pt-8 pb-4 flex-col mx-auto bg-gray-200 gap-4 p-4 ">
-        {nutritionistsResult?.nutritionists.map((nutritionist: Nutritionist) =>
+        {nutritionistsResult?.map((nutritionist: Nutritionist) =>
           nutritionist.services.map((service: Service) => (
             <div key={nutritionist.id + service.id}>
               <NutricionistCard
@@ -110,6 +128,46 @@ export default function NutritionistSearch() {
           nutritionist={nutritionist!}
           service={service!}
         />
+
+        <Pagination key={`${searchQuery.searchQuery}-${searchQuery.location_id}`}>
+          <PaginationContent className="gap-0">
+            <PaginationItem>
+              <Button
+                className={cn(
+                  "bg-white rounded-none text-black hover:bg-gray-300 border-1 border-gray-300 rounded-l-md border-r-0"
+                )}
+                disabled={page === 0}
+                onClick={() => setPage((p) => Math.max(p - 1, 0))}
+              >
+                <ChevronLeftIcon />
+              </Button>
+            </PaginationItem>
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <PaginationItem key={index}>
+                <Button
+                  className={cn(
+                    "bg-white rounded-none text-black hover:bg-gray-300 border-1 border-r-0 border-gray-300",
+                    page === index && "bg-emerald-400 hover:bg-emerald-500 text-white"
+                  )}
+                  onClick={() => setPage(index)}
+                >
+                  {index + 1}
+                </Button>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <Button
+                className={cn(
+                  "bg-white rounded-none text-black hover:bg-gray-300 border-1 border-gray-300 rounded-r-md"
+                )}
+                onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+                disabled={page === totalPages}
+              >
+                <ChevronRightIcon />
+              </Button>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </main>
     </div>
   );

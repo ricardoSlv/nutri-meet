@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { backendUrl } from "~/config/backend";
+import type { Nutritionist } from "~/types/Nutricionist";
 
 export type NutritionistSearchParams = {
   searchQuery: string;
@@ -16,7 +17,7 @@ export function useNutritionists(params: NutritionistSearchParams) {
     searchParams.set("location_id", params.location_id);
   }
 
-  return useQuery({
+  return useQuery<{ nutritionists: Nutritionist[]; count: number }, Error>({
     queryKey: ["nutritionists", params.searchQuery, params.location_id],
     queryFn: () => fetch(`${backendUrl}/nutritionists?${searchParams.toString()}`).then((res) => res.json()),
     staleTime: 1000 * 60 * 5,
