@@ -4,22 +4,8 @@ class NutritionistsController < ApplicationController
         @search_filter = filter_nutritionist_params[:search]
 
         nutritionists_json = Rails.cache.fetch("nutritionists-search:#{@search_filter}-location:#{@location_filter}", expires_in: 1.minute) do
-        # left_joins is used to get all nutritionists, even if they don't have any services or locations
-        @nutritionists = Nutritionist.left_joins(services: :location)
-
-        if @location_filter.present?
-          @nutritionists = @nutritionists.where(services: { location_id: @location_filter })
-        end
-
-        if @search_filter.present?
-          @nutritionists = @nutritionists
-          .where("nutritionists.name ILIKE ?", "%#{@search_filter}%")
-          .or(Nutritionist.left_joins(services: :location).where("services.name ILIKE ?", "%#{@search_filter}%"))
-        end
-
-
-        @nutritionists = @nutritionists.distinct
-
+        
+        @nutritionists = Nutritionist.search(@search_filter, @location_filter)
         nutritionists_json = @nutritionists.as_json(include: { services: { include: :location } })
 
         # Filter out services that don't match the search query if their nutritionist name doesn't match the search query either

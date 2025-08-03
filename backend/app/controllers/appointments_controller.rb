@@ -61,6 +61,10 @@ class AppointmentsController < ApplicationController
         @same_time_appointments.update_all(status: "rejected")
       end
 
+      if @appointment.status == "rejected"
+        AppointmentMailer.with(appointment: @appointment).rejected_appointment_email.deliver_now
+      end
+
       render json: @appointment, status: :ok
     else
       render json: { errors: @appointment.errors }, status: :unprocessable_entity

@@ -31,6 +31,8 @@ ja que o nome deste nao faz match com a pesquisa, apenas alguns servicos deste, 
 
 # Testes
 
+Functional testing para os controller de nutricionistas e appointments:
+
 1 - Pesquisar por "pe" permite testar a exclusao de pares "nutricionista-servico" para nutricionistas em que um dos seus outros servicos facam match
 
 - Exclusao por search

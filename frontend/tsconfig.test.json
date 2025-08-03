@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "verbatimModuleSyntax": false,
+    "types": ["node", "vite/client", "vitest/globals"]
+  },
+  "include": [
+    "test/**/*",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+} 

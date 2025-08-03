@@ -16,8 +16,6 @@ import Navbar from "~/components/layout/Navbar";
 import { useTranslation } from "react-i18next";
 
 import { usePaginatedNutritionistSearchResult } from "~/hooks/queries/usePaginatedNutricionists";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { cn } from "~/lib/utils";
 import ClientSidePagination from "~/components/layout/ClientSidePagination";
 
 export function meta({}: Route.MetaArgs) {
@@ -44,16 +42,12 @@ export default function NutritionistSearch() {
     error: errorNutritionists,
   } = usePaginatedNutritionistSearchResult({ ...searchQuery, limit: 4 });
 
-  console.log("nutritionistsResult", nutritionistsResult);
-
   const { data: locationsResult, isLoading: isLoadingLocations, error: errorLocations } = useLocations();
 
   const [open, setOpen] = useState(false);
   const [nutritionist, setNutritionist] = useState<Nutritionist | null>(null);
   const [service, setService] = useState<Service | null>(null);
 
-  if (isLoadingLocations) return <div>Loading...</div>;
-  if (errorLocations) return <div>Error: {errorLocations.message}</div>;
   return (
     <div className="h-screen flex flex-col">
       <Navbar />
@@ -113,7 +107,7 @@ export default function NutritionistSearch() {
           ))
         )}
 
-        {/* Gives me a new one whenever the modal is opened or closed */}
+        {/* Gives me a new modal whenever it is opened or closed */}
         <ScheduleAppointmentModal
           key={`${nutritionist?.id}-${service?.id}-${open}`}
           open={open}
