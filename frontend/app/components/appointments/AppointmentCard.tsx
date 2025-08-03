@@ -17,7 +17,7 @@ export default function AppointmentCard({
   const { t } = useTranslation();
 
   return (
-    <Card className="w-full flex flex-col gap-0 rounded-xs  py-0 px-0">
+    <Card className="w-full flex flex-col gap-0 rounded-xs  py-0 px-0 shadow-none">
       <div className="grid grid-cols-[80px_1fr] px-4 py-4">
         <Avatar name={appointment.guest_name} className="size-20" />
         <div className="flex flex-col gap-2">

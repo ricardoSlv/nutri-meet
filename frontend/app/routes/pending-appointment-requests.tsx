@@ -10,6 +10,10 @@ import AppointmentCard from "~/components/appointments/AppointmentCard";
 import AnswerAppointmentModal from "~/components/appointments/AnswerAppointmentModal";
 import { usePendingAppointments } from "~/hooks/queries/usePendingAppointments";
 import { useTranslation } from "react-i18next";
+import { Button } from "~/components/ui/button";
+import { TbRefresh } from "react-icons/tb";
+import { FaLink } from "react-icons/fa";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Scheduling Page" }, { name: "description", content: "Meet your nutritionist!" }];
@@ -52,18 +56,40 @@ export default function PendingAppointmentRequests() {
       </div>
 
       <main className="w-full flex-grow-1 bg-gray-200 flex-wrap gap-4">
-        <div className="grid grid-cols-4 gap-4 max-w-screen-xl items-center justify-start pt-8 pb-4  mx-auto">
-          {appointmentsResult?.appointments.map((appointment: Appointment) => (
-            <div key={appointment.id}>
-              <AppointmentCard
-                appointment={appointment}
-                onAnswerAppointment={() => {
-                  setAppointment(appointment);
-                  setOpen(true);
-                }}
-              />
+        <div className=" max-w-screen-xl items-center justify-start py-4 px-6 mx-auto bg-white m-4 rounded-xs shadow-xl">
+          <div className="flex flex-row items-center justify-between mb-4">
+            <div className="flex flex-col ">
+              <h1 className="text-lg text-gray-600">{t("pendingAppointments")}</h1>
+              <p className="text-sm text-gray-600">{t("acceptOrRejectPendingRequests")}</p>
             </div>
-          ))}
+            <div className="flex flex-row gap-2">
+              <Button variant="outline" className="h-6 w-8 rounded-xs">
+                <ChevronLeft />
+              </Button>
+              <Button variant="outline" className="h-6 w-8 rounded-xs">
+                <ChevronRight />
+              </Button>
+              <Button variant="outline" className="h-6 w-8 rounded-xs">
+                <FaLink />
+              </Button>
+              <Button variant="outline" className="h-6 w-8 rounded-xs">
+                <TbRefresh />
+              </Button>
+            </div>
+          </div>
+          <div className="grid grid-cols-4 gap-4 self-stretch">
+            {appointmentsResult?.appointments.map((appointment: Appointment) => (
+              <div key={appointment.id}>
+                <AppointmentCard
+                  appointment={appointment}
+                  onAnswerAppointment={() => {
+                    setAppointment(appointment);
+                    setOpen(true);
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
         {appointment && (
           <AnswerAppointmentModal

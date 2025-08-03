@@ -29,6 +29,8 @@
   "appointmentScheduledSuccessfully": "Marcação agendada com sucesso",
   "appointmentRejectedSuccessfully": "Marcação rejeitada com sucesso",
   "errorAnsweringRequestPleaseTryAgain": "Erro ao responder ao pedido, por favor tenta novamente",
+  "pendingAppointments": "Marcações pendentes",
+  "acceptOrRejectPendingRequests": "Aceitar ou rejeitar marcações pendentes",
   "allLocations": "Todas as localizações",
   "nutritionistSearch": "Pesquisa de nutricionista",
   "pendingAppointmentRequests": "Pedidos de marcação pendentes",
