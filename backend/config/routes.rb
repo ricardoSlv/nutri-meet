@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get "appointments", to: "appointments#index"
   post "appointments", to: "appointments#create"
-  patch "appointments/:id", to: "appointments#update"
+  patch "appointments/:id", to: "appointments#update", as: :appointment
 
   get "locations", to: "locations#index"
 

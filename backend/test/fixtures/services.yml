@@ -1,11 +1,67 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  location: one
-  price: 9.99
+perdaPeso:
+  name: Perda de peso
+  location: portimao
+  nutritionist: joaoDaSilva
+  price: 100.00
 
-two:
-  name: MyString
-  location: two
-  price: 9.99
+gestaoPeso:
+  name: Gestão de peso
+  location: vilaVerde
+  nutritionist: joaoDaSilva
+  price: 150.00
+
+nutricaoDesportiva:
+  name: Nutrição Desportiva
+  location: portimao
+  nutritionist: mariaOliveira
+  price: 200.00
+
+complementosDieteticos:
+  name: Complementos Dietéticos
+  location: barreiro
+  nutritionist: mariaOliveira
+  price: 300.00
+
+nutricaoCriancas:
+  name: Nutrição para crianças
+  location: portimao
+  nutritionist: pedroSantos
+  price: 122.50
+
+nutricaoIdosos:
+  name: Nutrição para idosos
+  location: vilaVerde
+  nutritionist: pedroSantos
+  price: 144.50
+
+consultaNutricaoClinica:
+  name: Consulta de Nutrição Clínica
+  location: braga
+  nutritionist: joaoDaSilva
+  price: 120.00
+
+planoAlimentar:
+  name: Plano Alimentar Personalizado
+  location: portimao
+  nutritionist: pedroSantos
+  price: 180.00
+
+reeducacaoAlimentar:
+  name: Reeducação Alimentar
+  location: vilaVerde
+  nutritionist: joaoDaSilva
+  price: 110.00
+
+nutricaoVegetariana:
+  name: Nutrição Vegetariana
+  location: barreiro
+  nutritionist: mariaOliveira
+  price: 130.00
+
+avaliacaoAntropometrica:
+  name: Avaliação Antropométrica
+  location: funchal
+  nutritionist: pedroSantos
+  price: 90.00

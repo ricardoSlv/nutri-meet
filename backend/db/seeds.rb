@@ -154,89 +154,99 @@ services = [
 
 ]
 
-guests = [
+appointment_requests = [
     {
         name: "Emilia Pereira",
         email: "emilia@gmail.com",
         appointment_date: "2025-07-27 10:00:00",
-        client_to_nutritionist: "João da Silva",
+        nutritionist: "João da Silva",
         service: "Perda de peso"
     },
     {
         name: "Paulo Proença",
         email: "paulo@gmail.com",
         appointment_date: "2025-07-28 10:00:00",
-        client_to_nutritionist: "João da Silva",
+        nutritionist: "João da Silva",
         service: "Gestão de peso"
     },
     { name: "Carlos Costa",
         email: "carlos@gmail.com",
         appointment_date: "2025-07-27 10:00:00",
-        client_to_nutritionist: "Maria Oliveira",
+        nutritionist: "Maria Oliveira",
         service: "Nutrição Desportiva"
     },
     {
         name: "Ana Ribeiro",
         email: "ana@gmail.com",
         appointment_date: "2025-07-28 10:00:00",
-        client_to_nutritionist: "Pedro Santos",
+        nutritionist: "Pedro Santos",
         service: "Complementos Dietéticos"
     },
     {
         name: "Beatriz Lopes",
         email: "beatriz.lopes@gmail.com",
         appointment_date: "2025-07-29 11:00:00",
-        client_to_nutritionist: "Maria Oliveira",
+        nutritionist: "Maria Oliveira",
         service: "Nutrição Vegetariana"
     },
     {
         name: "Ricardo Martins",
         email: "ricardo.martins@gmail.com",
         appointment_date: "2025-07-30 09:30:00",
-        client_to_nutritionist: "Pedro Santos",
+        nutritionist: "Pedro Santos",
         service: "Avaliação Antropométrica"
     },
     {
         name: "Sofia Almeida",
         email: "sofia.almeida@gmail.com",
         appointment_date: "2025-07-29 15:00:00",
-        client_to_nutritionist: "João da Silva",
+        nutritionist: "João da Silva",
         service: "Reeducação Alimentar"
     },
     {
         name: "Tiago Ferreira",
         email: "tiago.ferreira@gmail.com",
         appointment_date: "2025-07-31 14:00:00",
-        client_to_nutritionist: "Maria Oliveira",
+        nutritionist: "Maria Oliveira",
         service: "Nutrição Desportiva"
     },
     {
         name: "Helena Sousa",
         email: "helena.sousa@gmail.com",
         appointment_date: "2025-07-31 16:00:00",
-        client_to_nutritionist: "Pedro Santos",
+        nutritionist: "Pedro Santos",
         service: "Complementos Dietéticos"
     },
     {
         name: "Gabriel Lima",
         email: "gabriel.lima@gmail.com",
         appointment_date: "2025-08-01 10:00:00",
-        client_to_nutritionist: "Maria Oliveira",
+        nutritionist: "Maria Oliveira",
         service: "Gestão de peso"
     },
     {
         name: "Patrícia Silva",
         email: "patricia.silva@gmail.com",
         appointment_date: "2025-08-01 10:00:00",
-        client_to_nutritionist: "Maria Oliveira",
+        nutritionist: "Maria Oliveira",
         service: "Nutrição Desportiva"
     },
     {
         name: "Rafael Costa",
         email: "rafael.costa@gmail.com",
         appointment_date: "2025-08-01 10:00:00",
-        client_to_nutritionist: "Maria Oliveira",
+        nutritionist: "Maria Oliveira",
         service: "Nutrição Vegetariana"
+    }
+]
+
+accepted_appointment_requests = [
+    {
+        name: "Emilia Pereira",
+        email: "emilia@gmail.com",
+        appointment_date: "2025-08-01 10:00:00",
+        nutritionist: "João da Silva",
+        service: "Perda de peso"
     }
 ]
 
@@ -263,11 +273,21 @@ services.each do |service|
     )
 end
 
-guests.each do |guest|
+appointment_requests.each do |appointment_request|
     Appointment.create!(
-        guest_name: guest[:name],
-        guest_email: guest[:email],
-        datetime: guest[:appointment_date],
-        service_id: Service.find_by(name: guest[:service]).id,
-        nutritionist_id: Nutritionist.find_by(name: guest[:client_to_nutritionist]).id)
+        guest_name: appointment_request[:name],
+        guest_email: appointment_request[:email],
+        datetime: appointment_request[:appointment_date],
+        service_id: Service.find_by(name: appointment_request[:service]).id,
+        nutritionist_id: Nutritionist.find_by(name: appointment_request[:nutritionist]).id)
+end
+
+accepted_appointment_requests.each do |accepted_appointment_request|
+    Appointment.create!(
+        guest_name: accepted_appointment_request[:name],
+        guest_email: accepted_appointment_request[:email],
+        datetime: accepted_appointment_request[:appointment_date],
+        service_id: Service.find_by(name: accepted_appointment_request[:service]).id,
+        nutritionist_id: Nutritionist.find_by(name: accepted_appointment_request[:nutritionist]).id,
+        status: "accepted")
 end

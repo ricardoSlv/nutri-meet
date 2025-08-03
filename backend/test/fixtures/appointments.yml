@@ -1,11 +1,106 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+emiliaPereira:
+  guest_name: Emilia Pereira
+  guest_email: emilia@gmail.com
+  datetime: 2025-07-27 10:00:00
+  status: pending
+  service: perdaPeso
+  nutritionist: joaoDaSilva
+
+pauloProenca:
+  guest_name: Paulo Proença
+  guest_email: paulo@gmail.com
+  datetime: 2025-07-28 10:00:00
+  status: pending
+  service: gestaoPeso
+  nutritionist: joaoDaSilva
+
+carlosCosta:
+  guest_name: Carlos Costa
+  guest_email: carlos@gmail.com
+  datetime: 2025-07-27 10:00:00
+  status: pending
+  service: nutricaoDesportiva
+  nutritionist: mariaOliveira
+
+anaRibeiro:
+  guest_name: Ana Ribeiro
+  guest_email: ana@gmail.com
+  datetime: 2025-07-28 10:00:00
+  status: pending
+  service: complementosDieteticos
+  nutritionist: pedroSantos
+
+beatrizLopes:
+  guest_name: Beatriz Lopes
+  guest_email: beatriz.lopes@gmail.com
+  datetime: 2025-07-29 11:00:00
+  status: pending
+  service: nutricaoVegetariana
+  nutritionist: mariaOliveira
+
+ricardoMartins:
+  guest_name: Ricardo Martins
+  guest_email: ricardo.martins@gmail.com
+  datetime: 2025-07-30 09:30:00
+  status: pending
+  service: avaliacaoAntropometrica
+  nutritionist: pedroSantos
+
+sofiaAlmeida:
+  guest_name: Sofia Almeida
+  guest_email: sofia.almeida@gmail.com
+  datetime: 2025-07-29 15:00:00
+  status: pending
+  service: reeducacaoAlimentar
+  nutritionist: joaoDaSilva
+
+tiagoFerreira:
+  guest_name: Tiago Ferreira
+  guest_email: tiago.ferreira@gmail.com
+  datetime: 2025-07-31 14:00:00
+  status: pending
+  service: nutricaoDesportiva
+  nutritionist: mariaOliveira
+
+helenaSousa:
+  guest_name: Helena Sousa
+  guest_email: helena.sousa@gmail.com
+  datetime: 2025-07-31 16:00:00
+  status: pending
+  service: complementosDieteticos
+  nutritionist: pedroSantos
+
+gabrielLima:
+  guest_name: Gabriel Lima
+  guest_email: gabriel.lima@gmail.com
+  datetime: 2025-08-01 10:00:00
+  status: pending
+  service: gestaoPeso
+  nutritionist: mariaOliveira
+
+patriciaSilva:
+  guest_name: Patrícia Silva
+  guest_email: patricia.silva@gmail.com
+  datetime: 2025-08-01 10:00:00
+  status: pending
+  service: nutricaoDesportiva
+  nutritionist: mariaOliveira
+
+rafaelCosta:
+  guest_name: Rafael Costa
+  guest_email: rafael.costa@gmail.com
+  datetime: 2025-08-01 10:00:00
+  status: pending
+  service: nutricaoVegetariana
+  nutritionist: mariaOliveira
+
+emiliaPereiraAccepted:
+  guest_name: Emilia Pereira
+  guest_email: emilia@gmail.com
+  datetime: 2025-08-01 10:00:00
+  status: accepted
+  service: perdaPeso
+  nutritionist: joaoDaSilva
+

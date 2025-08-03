@@ -1,7 +1,49 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+portimao:
+  address: Rua da Praia, 123
+  municipality: Portimão
+  district: Faro
+  zipcode: "123456"
 
-two:
-  name: MyString
+vilaVerde:
+  address: Rua do Sobrado, 123
+  municipality: Vila Verde
+  district: Braga
+  zipcode: "123456"
+
+barreiro:
+  address: Rua da Bairro, 123
+  municipality: Barreiro
+  district: Lisboa
+  zipcode: "123456"
+
+porto:
+  address: Avenida dos Aliados, 100
+  municipality: Porto
+  district: Porto
+  zipcode: "400012"
+
+lisboa:
+  address: Praça do Comércio, 50
+  municipality: Lisboa
+  district: Lisboa
+  zipcode: "110012"
+
+coimbra:
+  address: Rua das Flores, 45
+  municipality: Coimbra
+  district: Coimbra
+  zipcode: "300045"
+
+braga:
+  address: Avenida Central, 200
+  municipality: Braga
+  district: Braga
+  zipcode: "470020"
+
+funchal:
+  address: Rua do Sol, 77
+  municipality: Funchal
+  district: Madeira
+  zipcode: "900077"

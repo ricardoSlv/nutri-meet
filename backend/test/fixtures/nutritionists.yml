@@ -1,9 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  service: MyString
+joaoDaSilva:
+  name: João da Silva
+  email: joao@gmail.com
+  website: https://joao.com
 
-two:
-  name: MyString
-  service: MyString
+mariaOliveira:
+  name: Maria Oliveira
+  email: maria@gmail.com
+  website: https://maria.com
+
+pedroSantos:
+  name: Pedro Santos
+  email: pedro@gmail.com
+  website: https://pedro.com
+
+anaCosta:
+  name: Ana Costa
+  email: ana.costa@gmail.com
+  website: https://anacosta.com

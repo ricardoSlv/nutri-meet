@@ -14,18 +14,11 @@ import { useLocations } from "~/hooks/queries/useLocations";
 import type { Location } from "~/types/Location";
 import Navbar from "~/components/layout/Navbar";
 import { useTranslation } from "react-i18next";
-import {
-  Pagination,
-  PaginationNext,
-  PaginationLink,
-  PaginationPrevious,
-  PaginationContent,
-  PaginationItem,
-  PaginationEllipsis,
-} from "~/components/ui/pagination";
+
 import { usePaginatedNutritionistSearchResult } from "~/hooks/queries/usePaginatedNutricionists";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { cn } from "~/lib/utils";
+import ClientSidePagination from "~/components/layout/ClientSidePagination";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Scheduling Page" }, { name: "description", content: "Meet your nutritionist!" }];
@@ -129,45 +122,7 @@ export default function NutritionistSearch() {
           service={service!}
         />
 
-        <Pagination key={`${searchQuery.searchQuery}-${searchQuery.location_id}`}>
-          <PaginationContent className="gap-0">
-            <PaginationItem>
-              <Button
-                className={cn(
-                  "bg-white rounded-none text-black hover:bg-gray-300 border-1 border-gray-300 rounded-l-md border-r-0"
-                )}
-                disabled={page === 0}
-                onClick={() => setPage((p) => Math.max(p - 1, 0))}
-              >
-                <ChevronLeftIcon />
-              </Button>
-            </PaginationItem>
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <PaginationItem key={index}>
-                <Button
-                  className={cn(
-                    "bg-white rounded-none text-black hover:bg-gray-300 border-1 border-r-0 border-gray-300",
-                    page === index && "bg-emerald-400 hover:bg-emerald-500 text-white"
-                  )}
-                  onClick={() => setPage(index)}
-                >
-                  {index + 1}
-                </Button>
-              </PaginationItem>
-            ))}
-            <PaginationItem>
-              <Button
-                className={cn(
-                  "bg-white rounded-none text-black hover:bg-gray-300 border-1 border-gray-300 rounded-r-md"
-                )}
-                onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-                disabled={page === totalPages}
-              >
-                <ChevronRightIcon />
-              </Button>
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+        <ClientSidePagination page={page} setPage={setPage} totalPages={totalPages} />
       </main>
     </div>
   );

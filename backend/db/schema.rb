@@ -19,8 +19,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_28_180806) do
     t.string "guest_email", null: false
     t.datetime "datetime", null: false
     t.string "status", default: "pending", null: false
-    t.integer "service_id", null: false
-    t.integer "nutritionist_id", null: false
+    t.bigint "service_id", null: false
+    t.bigint "nutritionist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["nutritionist_id"], name: "index_appointments_on_nutritionist_id"
@@ -47,8 +47,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_28_180806) do
   create_table "services", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "price", precision: 10, scale: 2
-    t.integer "location_id", null: false
-    t.integer "nutritionist_id", null: false
+    t.bigint "location_id", null: false
+    t.bigint "nutritionist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_services_on_location_id"

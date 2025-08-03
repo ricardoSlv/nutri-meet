@@ -16,7 +16,7 @@ export function usePaginatedNutritionistSearchResult(params: PaginatedNutritioni
   });
 
   const unwrappedNutritionists = useMemo(() => {
-    return nutritionistsQueryResult.data?.nutritionists.flatMap((nutritionist) =>
+    return nutritionistsQueryResult.data?.nutritionists?.flatMap((nutritionist) =>
       nutritionist.services.map((service) => ({
         ...nutritionist,
         services: [service],

@@ -29,12 +29,29 @@ Uma pesquisa por "Pe" ou "pe" retorna todos os servicos do nutricionista Pedro S
 mas apenas os servicos "Perda de peso" e "Gestao de Peso" do nutricionista Joao da Silva,
 ja que o nome deste nao faz match com a pesquisa, apenas alguns servicos deste, os restantes servicos sao omitidos.
 
+# Testes
+
+1 - Pesquisar por "pe" permite testar a exclusao de pares "nutricionista-servico" para nutricionistas em que um dos seus outros servicos facam match
+
+- Exclusao por search
+- Exclusao por location
+
+  2 - Pedido de appointments com colisao de horarios nao podem ser criados
+  3 - Rejeicao automatica de pending appointments a mesma hora quando um e aceite
+  4 - Apaga automaticamente pendind appointments previos quando e criado um novo com o mesmo email
+
+- Frontend testar que os cards sao removidos quando se aceita um de multiplos com colisao horaria
+
+# Full text search
+
+(pending)
+
 # Funcionalidades da aplicacao
 
 i18n
 caching client side react query, server side rails low level cache (rails por default ja faz cache das queries sql dentro da mesma action)
-paginacao client side (pending)
-testes (pending)
+paginacao client side (done)
+testes (controller functional testing done)
 
 # Problema detetado
 
